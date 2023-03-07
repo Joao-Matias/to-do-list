@@ -2,10 +2,22 @@ import { useRef, useState } from "react";
 
 const Form = (props) => {
   const [toggleButton, setToggleButton] = useState(true);
+  const [data, setData] = useState({
+    taskName: "",
+    dueDate: "",
+    priority: "low",
+  });
+
   const buttonEl = useRef();
 
   const submitForm = (e) => {
     e.preventDefault();
+    props.getNewTaskHandler(data);
+    props.closeFormHandler();
+  };
+
+  const getData = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const validateLength = (e) => {
@@ -22,26 +34,28 @@ const Form = (props) => {
     <form onSubmit={submitForm}>
       <label>
         Task Name:
-        <input onBlur={validateLength} name="taskName" type="text" />
+        <input
+          onChange={getData}
+          onBlur={validateLength}
+          name="taskName"
+          type="text"
+          maxLength={50}
+        />
       </label>
       <label>
         Due Date:
-        <input name="dueDate" type="date" />
+        <input onChange={getData} name="dueDate" type="date" />
       </label>
       <label>
         Priority:
-        <select>
+        <select name="priority" onChange={getData}>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
           <option value="High">High</option>
         </select>
       </label>
 
-      <button
-        ref={buttonEl}
-        disabled={toggleButton}
-        onClick={props.closeFormHandler}
-      >
+      <button ref={buttonEl} disabled={toggleButton}>
         Submit
       </button>
     </form>

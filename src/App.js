@@ -1,10 +1,10 @@
 import "./App.css";
-import NewTaskButton from "./newtask/NewTaskButton";
+import NewTask from "./newtask/NewTask";
 
 function App() {
   return (
     <>
-      <NewTaskButton />
+      <NewTask />
     </>
   );
 }
