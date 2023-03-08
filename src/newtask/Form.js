@@ -4,7 +4,7 @@ const Form = (props) => {
   const [toggleButton, setToggleButton] = useState(true);
   const [data, setData] = useState({
     taskName: "",
-    dueDate: "",
+    dueDate: "None",
     priority: "low",
   });
 
