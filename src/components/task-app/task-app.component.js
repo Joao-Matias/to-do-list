@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Form from "./Form";
-import NewTaskList from "./NewTaskList";
+import TaskForm from "../task-form";
+import NewTaskItem from "../new-task-item";
 
-const NewTask = () => {
+const TaskApp = () => {
   const [toggleForm, setToggleForm] = useState(false);
-  const [newTask, setNewTask] = useState([]);
+  const [taskList, setTaskList] = useState([]);
 
   const openForm = () => {
     setToggleForm(true);
@@ -15,18 +15,18 @@ const NewTask = () => {
   };
 
   const getNewTask = (data) => {
-    setNewTask([...newTask, data]);
+    setTaskList([...taskList, data]);
   };
 
   return (
     <>
       <button onClick={openForm}>Add Task</button>
       {toggleForm && (
-        <Form getNewTaskHandler={getNewTask} closeFormHandler={closeForm} />
+        <TaskForm getNewTaskHandler={getNewTask} closeFormHandler={closeForm} />
       )}
-      <NewTaskList allTasks={newTask} />
+      <NewTaskItem allTasks={taskList} />
     </>
   );
 };
 
-export default NewTask;
+export default TaskApp;

@@ -1,12 +1,8 @@
 import "./App.css";
-import NewTask from "./newtask/NewTask";
+import TaskApp from "./components/task-app";
 
 function App() {
-  return (
-    <>
-      <NewTask />
-    </>
-  );
+  return <TaskApp />;
 }
 
 export default App;
