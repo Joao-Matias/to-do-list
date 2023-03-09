@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import FormPriorityOptions from "../../services/form-priority-options";
+import PriorityOptions from "../../services/priority-options";
 
 const TaskForm = (props) => {
   const { getNewTaskHandler, closeFormHandler } = props;
@@ -36,7 +36,7 @@ const TaskForm = (props) => {
       </label>
       <label>
         Priority:
-        <FormPriorityOptions updateTaskHandler={updateTask} />
+        <PriorityOptions updateTaskHandler={updateTask} />
       </label>
 
       <button ref={buttonEl} disabled={task.name.length === 0}>
