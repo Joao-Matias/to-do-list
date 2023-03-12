@@ -13,7 +13,7 @@ const NewTaskItem = (props) => {
     <ul>
       {props.allTasks.map((task, index) => {
         return (
-          <li className={(styles.task, "${}")} key={index}>
+          <li className={styles.task} key={index}>
             <h4>Task Name:</h4>
             <h5>{task.name}</h5>
             <h4>Due Date:</h4>
