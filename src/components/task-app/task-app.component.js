@@ -1,6 +1,6 @@
 import { useState } from "react";
 import TaskForm from "../task-form";
-import NewTaskItem from "../new-task-item";
+import TaskList from "../task-list";
 
 const TaskApp = () => {
   const [toggleForm, setToggleForm] = useState(false);
@@ -24,7 +24,7 @@ const TaskApp = () => {
       {toggleForm && (
         <TaskForm getNewTaskHandler={getNewTask} closeFormHandler={closeForm} />
       )}
-      <NewTaskItem allTasks={taskList} />
+      <TaskList tasks={taskList} />
     </>
   );
 };

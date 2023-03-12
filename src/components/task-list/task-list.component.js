@@ -1,8 +1,9 @@
 import { useState } from "react";
-import styles from "./new-task-item.module.css";
+import styles from "./task-list.module.css";
 
-const NewTaskItem = (props) => {
+const TaskList = (props) => {
   const [completed, setCompleted] = useState([]);
+  const tasks = props.tasks;
 
   const toggleCompletion = (e) => {
     console.log(e);
@@ -11,7 +12,7 @@ const NewTaskItem = (props) => {
 
   return (
     <ul>
-      {props.allTasks.map((task, index) => {
+      {tasks.map((task, index) => {
         return (
           <li className={styles.task} key={index}>
             <h4>Task Name:</h4>
@@ -28,4 +29,4 @@ const NewTaskItem = (props) => {
   );
 };
 
-export default NewTaskItem;
+export default TaskList;
