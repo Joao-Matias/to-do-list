@@ -6,7 +6,6 @@ const TaskList = (props) => {
   const tasks = props.tasks;
 
   const toggleCompletion = (e) => {
-    console.log(e);
     setCompleted({ ...completed });
   };
 

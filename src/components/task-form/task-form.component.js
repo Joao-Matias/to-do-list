@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import GetPriorityOptions from "../../services/get-priority-options";
 
 const TaskForm = (props) => {
-  const { getNewTaskHandler, closeFormHandler } = props;
+  const { addNewTask, closeFormHandler } = props;
   const [task, setTask] = useState({
     name: "",
     dueDate: "",
@@ -22,7 +22,7 @@ const TaskForm = (props) => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    getNewTaskHandler(task);
+    addNewTask(task);
     closeFormHandler();
   };
 

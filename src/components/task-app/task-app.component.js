@@ -14,7 +14,7 @@ const TaskApp = () => {
     setToggleForm(false);
   };
 
-  const getNewTask = (data) => {
+  const addNewTask = (data) => {
     setTaskList([...taskList, data]);
   };
 
@@ -22,7 +22,7 @@ const TaskApp = () => {
     <>
       <button onClick={openForm}>Add Task</button>
       {toggleForm && (
-        <TaskForm getNewTaskHandler={getNewTask} closeFormHandler={closeForm} />
+        <TaskForm addNewTask={addNewTask} closeFormHandler={closeForm} />
       )}
       <TaskList tasks={taskList} />
     </>
