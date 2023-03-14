@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import getPriorityOptions from "../../services/get-priority-options";
 
 const TaskForm = (props) => {
@@ -8,8 +8,6 @@ const TaskForm = (props) => {
     dueDate: "",
     priority: "Low",
   });
-
-  const buttonEl = useRef();
 
   const options = getPriorityOptions().map((option) => {
     const { value, label } = option;
@@ -50,9 +48,7 @@ const TaskForm = (props) => {
         </select>
       </label>
 
-      <button ref={buttonEl} disabled={task.name.length === 0}>
-        Submit
-      </button>
+      <button disabled={task.name.length === 0}>Submit</button>
     </form>
   );
 };
