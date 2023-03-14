@@ -15,7 +15,7 @@ const TaskApp = () => {
   };
 
   const addNewTask = (task) => {
-    setTaskList([...taskList, task]);
+    setTaskList((prevState) => [...prevState, task]);
   };
 
   return (
