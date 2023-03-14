@@ -6,7 +6,7 @@ const TaskForm = (props) => {
   const [task, setTask] = useState({
     name: "",
     dueDate: "",
-    priority: "low",
+    priority: "Low",
   });
 
   const buttonEl = useRef();
@@ -20,8 +20,8 @@ const TaskForm = (props) => {
     );
   });
 
-  const submitForm = (e) => {
-    e.preventDefault();
+  const submitForm = (event) => {
+    event.preventDefault();
     addNewTask(task);
     closeFormHandler();
   };

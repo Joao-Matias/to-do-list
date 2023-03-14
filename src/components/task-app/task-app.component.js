@@ -3,25 +3,25 @@ import TaskForm from "../task-form";
 import TaskList from "../task-list";
 
 const TaskApp = () => {
-  const [toggleForm, setToggleForm] = useState(false);
+  const [formVisibility, setFormVisibility] = useState(false);
   const [taskList, setTaskList] = useState([]);
 
   const openForm = () => {
-    setToggleForm(true);
+    setFormVisibility(true);
   };
 
   const closeForm = () => {
-    setToggleForm(false);
+    setFormVisibility(false);
   };
 
-  const addNewTask = (data) => {
-    setTaskList([...taskList, data]);
+  const addNewTask = (task) => {
+    setTaskList([...taskList, task]);
   };
 
   return (
     <>
       <button onClick={openForm}>Add Task</button>
-      {toggleForm && (
+      {formVisibility && (
         <TaskForm addNewTask={addNewTask} closeFormHandler={closeForm} />
       )}
       <TaskList tasks={taskList} />
