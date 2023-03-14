@@ -9,6 +9,8 @@ const TaskList = (props) => {
     setCompleted({ ...completed });
   };
 
+  console.log("e");
+
   return (
     <ul>
       {tasks.map((task, index) => {
