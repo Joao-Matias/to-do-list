@@ -1,4 +1,4 @@
-const GetPriorityOptions = () => {
+const getPriorityOptions = () => {
   return [
     { value: "Low", label: "Low" },
     { value: "Medium", label: "Medium" },
@@ -6,4 +6,4 @@ const GetPriorityOptions = () => {
   ];
 };
 
-export default GetPriorityOptions;
+export default getPriorityOptions;

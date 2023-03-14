@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import GetPriorityOptions from "../../services/get-priority-options";
+import getPriorityOptions from "../../services/get-priority-options";
 
 const TaskForm = (props) => {
   const { addNewTask, closeFormHandler } = props;
@@ -11,7 +11,7 @@ const TaskForm = (props) => {
 
   const buttonEl = useRef();
 
-  const options = GetPriorityOptions().map((option) => {
+  const options = getPriorityOptions().map((option) => {
     const { value, label } = option;
     return (
       <option key={value} value={value}>
