@@ -5,7 +5,7 @@ const TaskList = (props) => {
   const [completed, setCompleted] = useState([]);
   const tasks = props.tasks;
 
-  const toggleCompletion = (e) => {
+  const toggleCompletion = (event) => {
     setCompleted({ ...completed });
   };
 
