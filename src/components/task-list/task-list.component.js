@@ -1,12 +1,12 @@
-import { useState } from "react";
 import styles from "./task-list.module.css";
 
 const TaskList = (props) => {
-  const [completed, setCompleted] = useState([]);
-  const tasks = props.tasks;
+  const { tasks, updatingCompletion } = props;
 
-  const toggleCompletion = (event) => {
-    setCompleted({ ...completed });
+  const checkboxToggle = (event) => {
+    console.log(event);
+
+    updatingCompletion();
   };
 
   return (
@@ -20,7 +20,7 @@ const TaskList = (props) => {
             <h5>{task.dueDate}</h5>
             <h4>Priority:</h4>
             <h5>{task.priority}</h5>
-            <input onClick={toggleCompletion} type="checkbox"></input>
+            <input onClick={checkboxToggle} type="checkbox"></input>
           </li>
         );
       })}

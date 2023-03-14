@@ -18,13 +18,15 @@ const TaskApp = () => {
     setTaskList((prevState) => [...prevState, task]);
   };
 
+  const updatingCompletion = (e) => {};
+
   return (
     <>
       <button onClick={openForm}>Add Task</button>
       {formVisibility && (
         <TaskForm addNewTask={addNewTask} closeFormHandler={closeForm} />
       )}
-      <TaskList tasks={taskList} />
+      <TaskList tasks={taskList} updatingCompletion={updatingCompletion} />
     </>
   );
 };
