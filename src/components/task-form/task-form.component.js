@@ -20,7 +20,7 @@ const TaskForm = (props) => {
 
   const submitForm = (event) => {
     event.preventDefault();
-    addNewTask(task);
+    addNewTask({ ...task, completed: false });
     closeFormHandler();
   };
 
