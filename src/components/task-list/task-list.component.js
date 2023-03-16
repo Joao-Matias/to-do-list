@@ -7,9 +7,7 @@ const TaskList = (props) => {
     taskCompletionToggle(event);
   };
 
-  const hoverCheckbox = () => {
-    <div>Ola</div>;
-  };
+  const toNotHaveError = () => {};
 
   return (
     <ul>
@@ -28,10 +26,11 @@ const TaskList = (props) => {
             <h4>Priority:</h4>
             <h5>{task.priority}</h5>
             <input
+              checked={task.completed ? true : false}
               hover-message={task.hoverMessage}
               className={styles.checkbox}
-              onMouseEnter={hoverCheckbox}
               type="checkbox"
+              onChange={toNotHaveError}
             ></input>
           </li>
         );

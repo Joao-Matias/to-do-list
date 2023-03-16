@@ -37,8 +37,33 @@ const TaskApp = () => {
     );
   };
 
+  const completeAllTasks = () => {
+    if (taskList.find((task) => !task.completed)) {
+      setTaskList(
+        taskList.map((task) => {
+          return {
+            ...task,
+            completed: true,
+            hoverMessage: "Mark as Incomplete",
+          };
+        })
+      );
+    } else {
+      setTaskList(
+        taskList.map((task) => {
+          return {
+            ...task,
+            completed: false,
+            hoverMessage: "Mark as Complete",
+          };
+        })
+      );
+    }
+  };
+
   return (
     <>
+      <button onClick={completeAllTasks}>Complete All</button>
       <button onClick={openForm}>Add Task</button>
       {formVisibility && (
         <TaskForm addNewTask={addNewTask} closeFormHandler={closeForm} />
