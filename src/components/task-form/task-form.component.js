@@ -7,6 +7,7 @@ const TaskForm = (props) => {
     name: "",
     dueDate: "",
     priority: "Low",
+    hoverMessage: "Mark as Complete",
   });
 
   const options = getPriorityOptions().map((option) => {

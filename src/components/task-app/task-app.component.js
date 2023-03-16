@@ -20,13 +20,18 @@ const TaskApp = () => {
 
   const taskCompletionToggle = (checkbox) => {
     const taskName = checkbox.target.parentElement.attributes.value.value;
-
     setTaskList(
       taskList.map((task) => {
         if (task.name !== taskName) {
           return task;
         } else {
-          return { ...task, completed: !task.completed };
+          return {
+            ...task,
+            completed: !task.completed,
+            hoverMessage: task.completed
+              ? "Mark as Complete"
+              : "Mark as Incomplete",
+          };
         }
       })
     );

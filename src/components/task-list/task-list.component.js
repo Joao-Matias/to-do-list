@@ -7,12 +7,16 @@ const TaskList = (props) => {
     taskCompletionToggle(event);
   };
 
+  const hoverCheckbox = () => {
+    <div>Ola</div>;
+  };
+
   return (
     <ul>
       {tasks.map((task, index) => {
         return (
           <li
-            className={styles.task}
+            className={task.completed ? styles.completedTask : styles.task}
             key={index}
             value={task.name}
             onChange={completionToggle}
@@ -23,7 +27,12 @@ const TaskList = (props) => {
             <h5>{task.dueDate}</h5>
             <h4>Priority:</h4>
             <h5>{task.priority}</h5>
-            <input type="checkbox"></input>
+            <input
+              hover-message={task.hoverMessage}
+              className={styles.checkbox}
+              onMouseEnter={hoverCheckbox}
+              type="checkbox"
+            ></input>
           </li>
         );
       })}
