@@ -7,7 +7,6 @@ const TaskForm = (props) => {
     name: "",
     dueDate: "",
     priority: "Low",
-    hoverMessage: "Mark as Complete",
   });
 
   const options = getPriorityOptions().map((option) => {
@@ -21,7 +20,7 @@ const TaskForm = (props) => {
 
   const submitForm = (event) => {
     event.preventDefault();
-    addNewTask({ ...task, completed: false });
+    addNewTask({ ...task, completed: false, id: Date.now() });
     closeFormHandler();
   };
 

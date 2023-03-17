@@ -19,18 +19,16 @@ const TaskApp = () => {
   };
 
   const taskCompletionToggle = (checkbox) => {
-    const taskName = checkbox.target.parentElement.attributes.value.value;
-    setTaskList(
-      taskList.map((task) => {
-        if (task.name !== taskName) {
+    const taskId = checkbox.target.parentElement.attributes.id;
+
+    setTaskList((prevState) =>
+      prevState.map((task) => {
+        if (task.id !== taskId) {
           return task;
         } else {
           return {
             ...task,
             completed: !task.completed,
-            hoverMessage: task.completed
-              ? "Mark as Complete"
-              : "Mark as Incomplete",
           };
         }
       })
@@ -39,26 +37,42 @@ const TaskApp = () => {
 
   const completeAllTasks = () => {
     if (taskList.find((task) => !task.completed)) {
-      setTaskList(
-        taskList.map((task) => {
+      setTaskList((prevState) =>
+        prevState.map((task) => {
           return {
             ...task,
             completed: true,
-            hoverMessage: "Mark as Incomplete",
           };
         })
       );
     } else {
-      setTaskList(
-        taskList.map((task) => {
+      setTaskList((prevState) =>
+        prevState.map((task) => {
           return {
             ...task,
             completed: false,
-            hoverMessage: "Mark as Complete",
           };
         })
       );
     }
+  };
+
+  const handleTaskCompleted = (event) => {
+    const taskId = +event.target.parentElement.attributes.id.value;
+    const selectedTask = taskList.find((task) => task.id === taskId);
+
+    console.log(taskId);
+    console.log(selectedTask);
+
+    setTaskList((prevState) =>
+      prevState.map((task) => {
+        if (task.id === selectedTask.id) {
+          return { ...task, completed: !task.completed };
+        } else {
+          return task;
+        }
+      })
+    );
   };
 
   return (
@@ -68,7 +82,11 @@ const TaskApp = () => {
       {formVisibility && (
         <TaskForm addNewTask={addNewTask} closeFormHandler={closeForm} />
       )}
-      <TaskList tasks={taskList} taskCompletionToggle={taskCompletionToggle} />
+      <TaskList
+        tasks={taskList}
+        taskCompletionToggle={taskCompletionToggle}
+        handleTaskCompleted={handleTaskCompleted}
+      />
     </>
   );
 };

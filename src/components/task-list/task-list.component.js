@@ -1,13 +1,15 @@
 import styles from "./task-list.module.css";
 
 const TaskList = (props) => {
-  const { tasks, taskCompletionToggle } = props;
+  const { tasks, taskCompletionToggle, handleTaskCompleted } = props;
 
   const completionToggle = (event) => {
     taskCompletionToggle(event);
   };
 
-  const toNotHaveError = () => {};
+  const clickCheckbox = (clickEvent) => {
+    handleTaskCompleted(clickEvent);
+  };
 
   return (
     <ul>
@@ -18,6 +20,7 @@ const TaskList = (props) => {
             key={index}
             value={task.name}
             onChange={completionToggle}
+            id={task.id}
           >
             <h4>Task Name:</h4>
             <h5>{task.name}</h5>
@@ -27,10 +30,12 @@ const TaskList = (props) => {
             <h5>{task.priority}</h5>
             <input
               checked={task.completed}
-              hover-message={task.hoverMessage}
+              hover-message={
+                task.completed ? "Mark as Incomplete" : "Mark as Complete"
+              }
               className={styles.checkbox}
               type="checkbox"
-              onChange={toNotHaveError}
+              onChange={clickCheckbox}
             ></input>
           </li>
         );
