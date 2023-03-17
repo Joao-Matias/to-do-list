@@ -18,23 +18,6 @@ const TaskApp = () => {
     setTaskList((prevState) => [...prevState, task]);
   };
 
-  const taskCompletionToggle = (checkbox) => {
-    const taskId = checkbox.target.parentElement.attributes.id;
-
-    setTaskList((prevState) =>
-      prevState.map((task) => {
-        if (task.id !== taskId) {
-          return task;
-        } else {
-          return {
-            ...task,
-            completed: !task.completed,
-          };
-        }
-      })
-    );
-  };
-
   const completeAllTasks = () => {
     if (taskList.find((task) => !task.completed)) {
       setTaskList((prevState) =>
@@ -79,11 +62,7 @@ const TaskApp = () => {
       {formVisibility && (
         <TaskForm addNewTask={addNewTask} closeFormHandler={closeForm} />
       )}
-      <TaskList
-        tasks={taskList}
-        taskCompletionToggle={taskCompletionToggle}
-        handleTaskCompleted={handleTaskCompleted}
-      />
+      <TaskList tasks={taskList} handleTaskCompleted={handleTaskCompleted} />
     </>
   );
 };

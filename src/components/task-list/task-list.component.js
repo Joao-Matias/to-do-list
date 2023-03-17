@@ -1,11 +1,7 @@
 import styles from "./task-list.module.css";
 
 const TaskList = (props) => {
-  const { tasks, taskCompletionToggle, handleTaskCompleted } = props;
-
-  const completionToggle = (event) => {
-    taskCompletionToggle(event);
-  };
+  const { tasks, handleTaskCompleted } = props;
 
   const clickCheckbox = (event) => {
     const taskId = +event.target.parentElement.attributes.id.value;
@@ -20,7 +16,6 @@ const TaskList = (props) => {
             className={task.completed ? styles.completedTask : styles.task}
             key={index}
             value={task.name}
-            onChange={completionToggle}
             id={task.id}
           >
             <h4>Task Name:</h4>
