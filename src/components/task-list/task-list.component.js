@@ -26,7 +26,7 @@ const TaskList = (props) => {
             <h4>Priority:</h4>
             <h5>{task.priority}</h5>
             <input
-              checked={task.completed ? true : false}
+              checked={task.completed}
               hover-message={task.hoverMessage}
               className={styles.checkbox}
               type="checkbox"
