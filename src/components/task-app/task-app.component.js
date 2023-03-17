@@ -57,12 +57,8 @@ const TaskApp = () => {
     }
   };
 
-  const handleTaskCompleted = (event) => {
-    const taskId = +event.target.parentElement.attributes.id.value;
+  const handleTaskCompleted = (taskId) => {
     const selectedTask = taskList.find((task) => task.id === taskId);
-
-    console.log(taskId);
-    console.log(selectedTask);
 
     setTaskList((prevState) =>
       prevState.map((task) => {
@@ -79,6 +75,7 @@ const TaskApp = () => {
     <>
       <button onClick={completeAllTasks}>Complete All</button>
       <button onClick={openForm}>Add Task</button>
+
       {formVisibility && (
         <TaskForm addNewTask={addNewTask} closeFormHandler={closeForm} />
       )}

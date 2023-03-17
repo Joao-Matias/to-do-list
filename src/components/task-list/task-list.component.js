@@ -7,8 +7,9 @@ const TaskList = (props) => {
     taskCompletionToggle(event);
   };
 
-  const clickCheckbox = (clickEvent) => {
-    handleTaskCompleted(clickEvent);
+  const clickCheckbox = (event) => {
+    const taskId = +event.target.parentElement.attributes.id.value;
+    handleTaskCompleted(taskId);
   };
 
   return (
