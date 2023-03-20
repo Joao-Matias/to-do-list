@@ -5,6 +5,7 @@ import TaskList from "../task-list";
 const TaskApp = () => {
   const [formVisibility, setFormVisibility] = useState(false);
   const [taskList, setTaskList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const openForm = () => {
     setFormVisibility(true);
@@ -56,13 +57,26 @@ const TaskApp = () => {
 
   return (
     <>
-      <button onClick={completeAllTasks}>Complete All</button>
-      <button onClick={openForm}>Add Task</button>
-
+      <button role="button" onClick={completeAllTasks}>
+        Complete All
+      </button>
+      <button role="button" onClick={openForm}>
+        Add Task
+      </button>
       {formVisibility && (
-        <TaskForm addNewTask={addNewTask} closeFormHandler={closeForm} />
+        <TaskForm
+          role="form"
+          addNewTask={addNewTask}
+          closeFormHandler={closeForm}
+        />
       )}
-      <TaskList tasks={taskList} handleTaskCompleted={handleTaskCompleted} />
+      <TaskList
+        role="list"
+        tasks={taskList}
+        handleTaskCompleted={handleTaskCompleted}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </>
   );
 };
