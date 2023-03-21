@@ -22,16 +22,15 @@ const TaskApp = () => {
   const completeAllTasks = () => {
     const uncompleted = taskList.some((task) => !task.completed);
 
-    if (taskList.find((task) => !task.completed)) {
-      setTaskList((prevState) =>
-        prevState.map((task) => {
-          return {
-            ...task,
-            completed: uncompleted,
-          };
-        })
-      );
-    }
+    taskList.find((task) => !task.completed);
+    setTaskList((prevState) =>
+      prevState.map((task) => {
+        return {
+          ...task,
+          completed: uncompleted,
+        };
+      })
+    );
   };
 
   const handleTaskCompleted = (taskId) => {
