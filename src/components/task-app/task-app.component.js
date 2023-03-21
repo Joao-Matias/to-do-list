@@ -1,6 +1,6 @@
-import { useState } from "react";
-import TaskForm from "../task-form";
-import TaskList from "../task-list";
+import { useState } from 'react';
+import TaskForm from '../task-form';
+import TaskList from '../task-list';
 
 const TaskApp = () => {
   const [formVisibility, setFormVisibility] = useState(false);
@@ -20,21 +20,14 @@ const TaskApp = () => {
   };
 
   const completeAllTasks = () => {
+    const uncompleted = taskList.some((task) => !task.completed);
+
     if (taskList.find((task) => !task.completed)) {
       setTaskList((prevState) =>
         prevState.map((task) => {
           return {
             ...task,
-            completed: true,
-          };
-        })
-      );
-    } else {
-      setTaskList((prevState) =>
-        prevState.map((task) => {
-          return {
-            ...task,
-            completed: false,
+            completed: uncompleted,
           };
         })
       );
@@ -57,21 +50,21 @@ const TaskApp = () => {
 
   return (
     <>
-      <button role="button" onClick={completeAllTasks}>
+      <button role='button' onClick={completeAllTasks}>
         Complete All
       </button>
-      <button role="button" onClick={openForm}>
+      <button role='button' onClick={openForm}>
         Add Task
       </button>
       {formVisibility && (
         <TaskForm
-          role="form"
+          role='form'
           addNewTask={addNewTask}
           closeFormHandler={closeForm}
         />
       )}
       <TaskList
-        role="list"
+        role='list'
         tasks={taskList}
         handleTaskCompleted={handleTaskCompleted}
         currentPage={currentPage}
