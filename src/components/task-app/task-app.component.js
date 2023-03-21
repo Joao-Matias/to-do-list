@@ -22,7 +22,6 @@ const TaskApp = () => {
   const completeAllTasks = () => {
     const uncompleted = taskList.some((task) => !task.completed);
 
-    taskList.find((task) => !task.completed);
     setTaskList((prevState) =>
       prevState.map((task) => {
         return {
