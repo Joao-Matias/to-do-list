@@ -48,10 +48,14 @@ const TaskApp = () => {
 
   return (
     <>
-      <button role='button' onClick={completeAllTasks}>
+      <button
+        style={{ cursor: 'pointer' }}
+        role='button'
+        onClick={completeAllTasks}
+      >
         Complete All
       </button>
-      <button role='button' onClick={openForm}>
+      <button style={{ cursor: 'pointer' }} role='button' onClick={openForm}>
         Add Task
       </button>
       {formVisibility && (
@@ -64,6 +68,7 @@ const TaskApp = () => {
       <TaskList
         role='list'
         tasks={taskList}
+        setTasks={setTaskList}
         handleTaskCompleted={handleTaskCompleted}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

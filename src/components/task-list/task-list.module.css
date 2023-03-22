@@ -1,10 +1,25 @@
+.marginRight {
+  margin-right: 25px;
+}
+
+.smallMarginRight {
+  margin-right: 10px;
+}
+
 .task {
   list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .completedTask {
   text-decoration: line-through;
   list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 50px;
 }
 
 .checkbox {
