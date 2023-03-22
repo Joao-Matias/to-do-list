@@ -3,7 +3,6 @@ import styles from './delete-modal.module.css';
 const DeleteModal = (props) => {
   const { setShowModal, chooseDeleteTask, taskId } = props;
 
-  console.log(taskId);
   const deleteTask = (event) => {
     const taskToDeleteId = +event.target.parentElement.id;
     console.log(event);
