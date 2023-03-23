@@ -6,6 +6,7 @@ import { useState } from 'react';
 const TASKS_PER_PAGE = 10;
 
 const TaskList = (props) => {
+  const [selectedTask, setSelectTask] = useState();
   const [showModal, setShowModal] = useState(false);
   const { tasks, setTasks, handleTaskCompleted, currentPage, setCurrentPage } =
     props;
@@ -22,12 +23,13 @@ const TaskList = (props) => {
     handleTaskCompleted(taskId);
   };
 
-  const openModal = () => {
+  const openModal = (event) => {
     setShowModal(true);
+    setSelectTask(event);
   };
 
   const chooseDeleteTask = (taskId) => {
-    // setTasks((prevState) => prevState.filter((task) => task.id !== taskId));
+    setTasks((prevState) => prevState.filter((task) => task.id !== taskId));
   };
 
   return (
@@ -57,6 +59,8 @@ const TaskList = (props) => {
               <li
                 className={task.completed ? styles.completedTask : styles.task}
                 key={task.id}
+                id={task.id}
+                name={task.name}
               >
                 <h4 className={styles.smallMarginRight}>Task Name:</h4>
                 <h5 className={styles.marginRight}>{task.name}</h5>
@@ -76,10 +80,17 @@ const TaskList = (props) => {
                   onChange={clickCheckbox}
                   style={{ cursor: 'pointer' }}
                 ></input>
-                <ImBin style={{ cursor: 'pointer' }} onClick={openModal} />
+                <div
+                  onClick={openModal}
+                  hover-message={'Delete task'}
+                  className={styles.bin}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <ImBin />
+                </div>
                 {showModal && (
                   <DeleteModal
-                    taskId={task.id}
+                    selectedTask={selectedTask}
                     chooseDeleteTask={chooseDeleteTask}
                     setShowModal={setShowModal}
                   />

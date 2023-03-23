@@ -46,6 +46,10 @@ const TaskApp = () => {
     );
   };
 
+  const deleteAllTasks = () => {
+    setTaskList([]);
+  };
+
   return (
     <>
       <button
@@ -57,6 +61,13 @@ const TaskApp = () => {
       </button>
       <button style={{ cursor: 'pointer' }} role='button' onClick={openForm}>
         Add Task
+      </button>
+      <button
+        style={{ cursor: 'pointer' }}
+        role='button'
+        onClick={deleteAllTasks}
+      >
+        Delete All Tasks
       </button>
       {formVisibility && (
         <TaskForm

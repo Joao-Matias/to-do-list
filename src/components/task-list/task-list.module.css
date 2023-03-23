@@ -22,12 +22,13 @@
   margin-right: 50px;
 }
 
-.checkbox {
+.checkbox,
+.bin {
   position: relative;
-  border-bottom: 1px dotted black;
 }
 
-.checkbox:before {
+.checkbox:before,
+.bin:before {
   content: attr(hover-message);
   visibility: hidden;
   opacity: 0;
@@ -43,9 +44,39 @@
   z-index: 1;
   left: 0;
   top: 110%;
+  font-size: 13px;
 }
 
-.checkbox:hover:before {
+.checkbox:hover:before,
+.bin:hover:before {
   opacity: 1;
   visibility: visible;
 }
+
+/* .bin {
+  position: relative;
+}
+
+.bin:before {
+  content: attr(hover-message);
+  visibility: hidden;
+  opacity: 0;
+  width: 140px;
+  background-color: rgb(235, 235, 235);
+  color: #373737;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px 0;
+  transition: opacity 1s ease-in-out;
+
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 110%;
+  font-size: 13px;
+}
+
+.bin:hover:before {
+  opacity: 1;
+  visibility: visible;
+} */
