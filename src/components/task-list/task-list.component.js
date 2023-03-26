@@ -69,7 +69,6 @@ const TaskList = (props) => {
                 <h5 className={styles.marginRight}>{task.priority}</h5>
                 <input
                   id={task.id}
-                  role='button'
                   checked={task.completed}
                   hover-message={
                     task.completed ? 'Mark as Incomplete' : 'Mark as Complete'
