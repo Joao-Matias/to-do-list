@@ -1,18 +1,36 @@
+.marginRight {
+  margin-right: 25px;
+}
+
+.smallMarginRight {
+  margin-right: 10px;
+}
+
 .task {
   list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .completedTask {
   text-decoration: line-through;
   list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 50px;
 }
 
-.checkbox {
+.checkbox,
+.bin {
   position: relative;
-  border-bottom: 1px dotted black;
+  z-index: 1;
+  cursor: pointer;
 }
 
-.checkbox:before {
+.checkbox:before,
+.bin:before {
   content: attr(hover-message);
   visibility: hidden;
   opacity: 0;
@@ -28,9 +46,11 @@
   z-index: 1;
   left: 0;
   top: 110%;
+  font-size: 13px;
 }
 
-.checkbox:hover:before {
+.checkbox:hover:before,
+.bin:hover:before {
   opacity: 1;
   visibility: visible;
 }

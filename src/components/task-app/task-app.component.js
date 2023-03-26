@@ -46,14 +46,15 @@ const TaskApp = () => {
     );
   };
 
+  const deleteAllTasks = () => {
+    setTaskList([]);
+  };
+
   return (
     <>
-      <button role='button' onClick={completeAllTasks}>
-        Complete All
-      </button>
-      <button role='button' onClick={openForm}>
-        Add Task
-      </button>
+      <button onClick={completeAllTasks}>Complete All</button>
+      <button onClick={openForm}>Add Task</button>
+      <button onClick={deleteAllTasks}>Delete All Tasks</button>
       {formVisibility && (
         <TaskForm
           role='form'
@@ -64,6 +65,7 @@ const TaskApp = () => {
       <TaskList
         role='list'
         tasks={taskList}
+        setTasks={setTaskList}
         handleTaskCompleted={handleTaskCompleted}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

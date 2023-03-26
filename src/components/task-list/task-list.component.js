@@ -1,9 +1,15 @@
-import styles from "./task-list.module.css";
+import styles from './task-list.module.css';
+import { ImBin } from 'react-icons/im';
+import DeleteModal from '../delete-modal';
+import { useState } from 'react';
 
 const TASKS_PER_PAGE = 10;
 
 const TaskList = (props) => {
-  const { tasks, handleTaskCompleted, currentPage, setCurrentPage } = props;
+  const [selectedTask, setSelectTask] = useState();
+  const [showModal, setShowModal] = useState(false);
+  const { tasks, setTasks, handleTaskCompleted, currentPage, setCurrentPage } =
+    props;
 
   const tasksWithIndex = tasks.map((task, i) => ({
     ...task,
@@ -17,19 +23,28 @@ const TaskList = (props) => {
     handleTaskCompleted(taskId);
   };
 
+  const openModal = (task) => {
+    setShowModal(true);
+    setSelectTask(task);
+  };
+
+  const chooseDeleteTask = (taskId) => {
+    setTasks((prevState) => prevState.filter((task) => task.id !== taskId));
+  };
+
   return (
     <>
       <>
         {Array(pages)
           .fill(null)
           .map((_, i) => (
-            <span
+            <button
               key={i}
-              className={i === currentPage ? "active" : ""}
+              className={i === currentPage ? 'active' : ''}
               onClick={() => setCurrentPage(i)}
             >
               {i + 1}
-            </span>
+            </button>
           ))}
       </>
       <ul>
@@ -43,24 +58,39 @@ const TaskList = (props) => {
               <li
                 className={task.completed ? styles.completedTask : styles.task}
                 key={task.id}
+                id={task.id}
+                name={task.name}
               >
-                <h4>Task Name:</h4>
-                <h5>{task.name}</h5>
-                <h4>Due Date:</h4>
-                <h5>{task.dueDate}</h5>
-                <h4>Priority:</h4>
-                <h5>{task.priority}</h5>
+                <h4 className={styles.smallMarginRight}>Task Name:</h4>
+                <h5 className={styles.marginRight}>{task.name}</h5>
+                <h4 className={styles.smallMarginRight}>Due Date:</h4>
+                <h5 className={styles.marginRight}>{task.dueDate}</h5>
+                <h4 className={styles.smallMarginRight}>Priority:</h4>
+                <h5 className={styles.marginRight}>{task.priority}</h5>
                 <input
                   id={task.id}
-                  role="button"
                   checked={task.completed}
                   hover-message={
-                    task.completed ? "Mark as Incomplete" : "Mark as Complete"
+                    task.completed ? 'Mark as Incomplete' : 'Mark as Complete'
                   }
                   className={styles.checkbox}
-                  type="checkbox"
+                  type='checkbox'
                   onChange={clickCheckbox}
                 ></input>
+                <div
+                  onClick={() => openModal(task)}
+                  hover-message={'Delete task'}
+                  className={styles.bin}
+                >
+                  <ImBin />
+                </div>
+                {showModal && (
+                  <DeleteModal
+                    selectedTask={selectedTask}
+                    chooseDeleteTask={chooseDeleteTask}
+                    setShowModal={setShowModal}
+                  />
+                )}
               </li>
             );
           })}
