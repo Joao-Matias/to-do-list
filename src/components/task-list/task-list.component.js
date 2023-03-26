@@ -76,15 +76,13 @@ const TaskList = (props) => {
                   className={styles.checkbox}
                   type='checkbox'
                   onChange={clickCheckbox}
-                  style={{ cursor: 'pointer' }}
                 ></input>
                 <div
                   onClick={openModal}
                   hover-message={'Delete task'}
                   className={styles.bin}
-                  style={{ cursor: 'pointer' }}
                 >
-                  <ImBin className={styles} />
+                  <ImBin />
                 </div>
                 {showModal && (
                   <DeleteModal
