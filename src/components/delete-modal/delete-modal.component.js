@@ -22,12 +22,10 @@ const DeleteModal = (props) => {
       <header>
         <strong>Your about to delete task {taskName}.</strong> Are you sure?
       </header>
-      <button id={taskId} onClick={deleteTask} style={{ cursor: 'pointer' }}>
+      <button id={taskId} onClick={deleteTask}>
         Yes
       </button>
-      <button onClick={notDeleteTask} style={{ cursor: 'pointer' }}>
-        No
-      </button>
+      <button onClick={notDeleteTask}>No</button>
     </div>
   );
 };

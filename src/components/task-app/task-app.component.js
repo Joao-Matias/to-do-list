@@ -52,23 +52,9 @@ const TaskApp = () => {
 
   return (
     <>
-      <button
-        style={{ cursor: 'pointer' }}
-        role='button'
-        onClick={completeAllTasks}
-      >
-        Complete All
-      </button>
-      <button style={{ cursor: 'pointer' }} role='button' onClick={openForm}>
-        Add Task
-      </button>
-      <button
-        style={{ cursor: 'pointer' }}
-        role='button'
-        onClick={deleteAllTasks}
-      >
-        Delete All Tasks
-      </button>
+      <button onClick={completeAllTasks}>Complete All</button>
+      <button onClick={openForm}>Add Task</button>
+      <button onClick={deleteAllTasks}>Delete All Tasks</button>
       {formVisibility && (
         <TaskForm
           role='form'

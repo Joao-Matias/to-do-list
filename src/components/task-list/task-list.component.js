@@ -24,8 +24,9 @@ const TaskList = (props) => {
   };
 
   const openModal = (event) => {
-    setShowModal(true);
-    setSelectTask(event);
+    // setShowModal(true);
+    // setSelectTask(event);
+    console.log(event.target);
   };
 
   const chooseDeleteTask = (taskId) => {
