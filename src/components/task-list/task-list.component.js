@@ -23,9 +23,9 @@ const TaskList = (props) => {
     handleTaskCompleted(taskId);
   };
 
-  const openModal = (event) => {
+  const openModal = (task) => {
     setShowModal(true);
-    setSelectTask(event);
+    setSelectTask(task);
   };
 
   const chooseDeleteTask = (taskId) => {
@@ -78,7 +78,7 @@ const TaskList = (props) => {
                   onChange={clickCheckbox}
                 ></input>
                 <div
-                  onClick={openModal}
+                  onClick={() => openModal(task)}
                   hover-message={'Delete task'}
                   className={styles.bin}
                 >
