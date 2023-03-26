@@ -24,9 +24,8 @@ const TaskList = (props) => {
   };
 
   const openModal = (event) => {
-    // setShowModal(true);
-    // setSelectTask(event);
-    console.log(event.target);
+    setShowModal(true);
+    setSelectTask(event);
   };
 
   const chooseDeleteTask = (taskId) => {
@@ -39,14 +38,13 @@ const TaskList = (props) => {
         {Array(pages)
           .fill(null)
           .map((_, i) => (
-            <span
-              style={{ cursor: 'pointer' }}
+            <button
               key={i}
               className={i === currentPage ? 'active' : ''}
               onClick={() => setCurrentPage(i)}
             >
               {i + 1}
-            </span>
+            </button>
           ))}
       </>
       <ul>
@@ -87,7 +85,7 @@ const TaskList = (props) => {
                   className={styles.bin}
                   style={{ cursor: 'pointer' }}
                 >
-                  <ImBin />
+                  <ImBin className={styles} />
                 </div>
                 {showModal && (
                   <DeleteModal
