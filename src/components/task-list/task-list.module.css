@@ -23,14 +23,16 @@
 }
 
 .checkbox,
-.bin {
+.bin,
+.pencil {
   position: relative;
   z-index: 1;
   cursor: pointer;
 }
 
 .checkbox:before,
-.bin:before {
+.bin:before,
+.pencil:before {
   content: attr(hover-message);
   visibility: hidden;
   opacity: 0;
@@ -50,7 +52,15 @@
 }
 
 .checkbox:hover:before,
-.bin:hover:before {
+.bin:hover:before,
+.pencil:hover:before {
   opacity: 1;
   visibility: visible;
+}
+
+.icons {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

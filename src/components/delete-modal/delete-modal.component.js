@@ -1,25 +1,33 @@
 import styles from './delete-modal.module.css';
 
 const DeleteModal = (props) => {
-  const { setShowModal, chooseDeleteTask, selectedTask } = props;
+  const { setShowDeleteModal, chooseDeleteTask, selectedTask } = props;
 
   const deleteTask = () => {
     chooseDeleteTask(selectedTask.id);
-    setShowModal(false);
+    setShowDeleteModal(false);
   };
 
   const notDeleteTask = () => {
-    setShowModal(false);
+    setShowDeleteModal(false);
   };
 
   return (
     <div className={styles.modal}>
       <header>
-        Your about to delete task <strong>{selectedTask.name}</strong>. Are you
-        sure?
+        <strong className={styles.modalHead}>
+          Your about to delete task {selectedTask.name}
+        </strong>
       </header>
-      <button onClick={deleteTask}>Yes</button>
-      <button onClick={notDeleteTask}>No</button>
+      <h4>Are you sure?</h4>
+      <div className={styles.buttons}>
+        <button className={styles.button} onClick={deleteTask}>
+          Yes
+        </button>
+        <button className={styles.button} onClick={notDeleteTask}>
+          No
+        </button>
+      </div>
     </div>
   );
 };
