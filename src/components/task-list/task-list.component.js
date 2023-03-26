@@ -2,7 +2,7 @@ import styles from './task-list.module.css';
 import { ImBin, ImPencil } from 'react-icons/im';
 import DeleteModal from '../delete-modal';
 import { useState } from 'react';
-import EditModal from '../edit-modal';
+import EditModal from '../../services/get-priority-options/edit-modal';
 
 const TASKS_PER_PAGE = 10;
 

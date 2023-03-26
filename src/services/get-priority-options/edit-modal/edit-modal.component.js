@@ -1,5 +1,5 @@
 import styles from './edit-modal.module.css';
-import getPriorityOptions from '../../services/get-priority-options';
+import getPriorityOptions from '..';
 import { useState } from 'react';
 
 const EditModal = (props) => {
