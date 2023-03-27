@@ -1,11 +1,23 @@
 import { useState } from 'react';
 import TaskForm from '../task-form';
 import TaskList from '../task-list';
+import getCompletionOptions from '../../services/get-completion-options';
 
 const TaskApp = () => {
   const [formVisibility, setFormVisibility] = useState(false);
   const [taskList, setTaskList] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+
+  const [filteredOption, setFilteredOptions] = useState('All Tasks');
+
+  const options = getCompletionOptions().map((option) => {
+    const { value, label } = option;
+    return (
+      <option key={value} value={value}>
+        {label}
+      </option>
+    );
+  });
 
   const openForm = () => {
     setFormVisibility(true);
@@ -50,11 +62,16 @@ const TaskApp = () => {
     setTaskList([]);
   };
 
+  const selectCompletionStatus = (event) => {
+    setFilteredOptions(event.target.value);
+  };
+
   return (
     <>
       <button onClick={completeAllTasks}>Complete All</button>
       <button onClick={openForm}>Add Task</button>
       <button onClick={deleteAllTasks}>Delete All Tasks</button>
+      <select onChange={selectCompletionStatus}>{options}</select>
       {formVisibility && (
         <TaskForm
           role='form'
@@ -69,6 +86,7 @@ const TaskApp = () => {
         handleTaskCompleted={handleTaskCompleted}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
+        filteredOption={filteredOption}
       />
     </>
   );

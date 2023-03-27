@@ -10,10 +10,30 @@ const TaskList = (props) => {
   const [selectedTask, setSelectTask] = useState();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const { tasks, setTasks, handleTaskCompleted, currentPage, setCurrentPage } =
-    props;
+  const {
+    tasks,
+    setTasks,
+    handleTaskCompleted,
+    currentPage,
+    setCurrentPage,
+    filteredOption,
+  } = props;
 
-  const tasksWithIndex = tasks.map((task, i) => ({
+  const filteredTasks = (option) => {
+    if (option === 'All Tasks') {
+      return tasks;
+    }
+    if (option === 'Incompleted') {
+      return tasks.filter((task) => !task.completed);
+    }
+    if (option === 'Completed') {
+      return tasks.filter((task) => task.completed);
+    } else {
+      return [];
+    }
+  };
+
+  const tasksWithIndex = filteredTasks(filteredOption).map((task, i) => ({
     ...task,
     pageIndex: i + 1,
   }));
