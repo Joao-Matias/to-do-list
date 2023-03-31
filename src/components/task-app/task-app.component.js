@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import TaskForm from '../task-form';
 import TaskList from '../task-list';
-import getCompletionOptions from '../../services/get-completion-options';
+// import getCompletionOptions from '../../services/get-completion-options';
 import {
   getTasks,
   addTask,
@@ -10,6 +10,7 @@ import {
   completeTasks,
   deleteCompletedTasks,
 } from '../../services/tasks';
+import Options from '../options';
 
 const TaskApp = () => {
   const [formVisibility, setFormVisibility] = useState(false);
@@ -23,15 +24,6 @@ const TaskApp = () => {
       setTaskList(tasks);
     }
   }, []);
-
-  const options = getCompletionOptions().map((option) => {
-    const { value, label } = option;
-    return (
-      <option key={value} value={value}>
-        {label}
-      </option>
-    );
-  });
 
   const openForm = () => {
     setFormVisibility(true);
@@ -78,7 +70,9 @@ const TaskApp = () => {
       <button onClick={openForm}>Add Task</button>
       <button onClick={deleteAllTasks}>Delete All Tasks</button>
       <button onClick={deleteAllTaskPlusStorage}>Clear Complete</button>
-      <select onChange={selectCompletionStatus}>{options}</select>
+      <select onChange={selectCompletionStatus}>
+        <Options />
+      </select>
       {formVisibility && (
         <TaskForm
           role='form'
