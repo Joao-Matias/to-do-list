@@ -1,1 +1,10 @@
-export { getTasks, addTask } from './tasks.service.js';
+export {
+  getTasks,
+  addTask,
+  deleteAllTasksLocal,
+  deleteTask,
+  editTask,
+  checkBoxClick,
+  completeTasks,
+  deleteCompletedTasks,
+} from './tasks.service.js';

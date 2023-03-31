@@ -2,7 +2,14 @@ import { useEffect, useState } from 'react';
 import TaskForm from '../task-form';
 import TaskList from '../task-list';
 import getCompletionOptions from '../../services/get-completion-options';
-import { getTasks } from '../../services/tasks';
+import {
+  getTasks,
+  addTask,
+  deleteAllTasksLocal,
+  checkBoxClick,
+  completeTasks,
+  deleteCompletedTasks,
+} from '../../services/tasks';
 
 const TaskApp = () => {
   const [formVisibility, setFormVisibility] = useState(false);
@@ -16,13 +23,6 @@ const TaskApp = () => {
       setTaskList(tasks);
     }
   }, []);
-
-  useEffect(() => {
-    if (taskList.length === 0) {
-    } else {
-      localStorage.setItem('tasks', JSON.stringify(taskList));
-    }
-  }, [taskList]);
 
   const options = getCompletionOptions().map((option) => {
     const { value, label } = option;
@@ -42,44 +42,30 @@ const TaskApp = () => {
   };
 
   const addNewTask = (task) => {
-    setTaskList((prevState) => [...prevState, task]);
+    setTaskList((prevState) => {
+      const addedTask = addTask(task);
+      return [...prevState, addedTask];
+    });
   };
 
   const completeAllTasks = () => {
-    const uncompleted = taskList.some((task) => !task.completed);
-
-    setTaskList((prevState) =>
-      prevState.map((task) => {
-        return {
-          ...task,
-          completed: uncompleted,
-        };
-      })
-    );
+    const completedTasks = completeTasks();
+    setTaskList(completedTasks);
   };
 
   const handleTaskCompleted = (taskId) => {
-    const selectedTask = taskList.find((task) => task.id === taskId);
-
-    setTaskList((prevState) =>
-      prevState.map((task) => {
-        if (task.id === selectedTask.id) {
-          return { ...task, completed: !task.completed };
-        } else {
-          return task;
-        }
-      })
-    );
+    const changedTask = checkBoxClick(taskId);
+    setTaskList(changedTask);
   };
 
   const deleteAllTasks = () => {
     setTaskList([]);
-    localStorage.clear();
+    deleteAllTasksLocal();
   };
 
   const deleteAllTaskPlusStorage = () => {
-    const completedTasks = taskList.filter((task) => !task.completed);
-    setTaskList(completedTasks);
+    const undeletedTasks = deleteCompletedTasks();
+    setTaskList(undeletedTasks);
   };
 
   const selectCompletionStatus = (event) => {

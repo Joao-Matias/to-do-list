@@ -3,6 +3,7 @@ import { ImBin, ImPencil } from 'react-icons/im';
 import DeleteModal from '../delete-modal';
 import { useState } from 'react';
 import EditModal from '../edit-modal';
+import { deleteTask, editTask } from '../../services/tasks';
 
 const TASKS_PER_PAGE = 10;
 
@@ -51,7 +52,8 @@ const TaskList = (props) => {
   };
 
   const chooseDeleteTask = (taskId) => {
-    setTasks((prevState) => prevState.filter((task) => task.id !== taskId));
+    const tasksNotDeleted = deleteTask(taskId);
+    setTasks(tasksNotDeleted);
   };
 
   const openEditModal = (task) => {
@@ -60,15 +62,8 @@ const TaskList = (props) => {
   };
 
   const chooseEditTask = (newTask) => {
-    setTasks((prevState) =>
-      prevState.map((task) => {
-        if (task.id !== newTask.id) {
-          return task;
-        } else {
-          return newTask;
-        }
-      })
-    );
+    const editTasks = editTask(newTask);
+    setTasks(editTasks);
   };
 
   return (
