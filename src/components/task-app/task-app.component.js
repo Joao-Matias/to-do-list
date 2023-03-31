@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import TaskForm from '../task-form';
 import TaskList from '../task-list';
 import getCompletionOptions from '../../services/get-completion-options';
+import { getTasks } from '../../services/tasks';
 
 const TaskApp = () => {
   const [formVisibility, setFormVisibility] = useState(false);
@@ -10,7 +11,7 @@ const TaskApp = () => {
   const [filteredOption, setFilteredOptions] = useState('All Tasks');
 
   useEffect(() => {
-    const tasks = JSON.parse(localStorage.getItem('tasks'));
+    const tasks = getTasks();
     if (tasks) {
       setTaskList(tasks);
     }
