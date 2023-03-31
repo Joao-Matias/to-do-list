@@ -20,24 +20,44 @@ const TaskList = (props) => {
     filteredOption,
   } = props;
 
-  const filteredTasks = (option) => {
-    if (option === 'All Tasks') {
-      return tasks;
-    }
-    if (option === 'Incompleted') {
-      return tasks.filter((task) => !task.completed);
-    }
-    if (option === 'Completed') {
-      return tasks.filter((task) => task.completed);
-    } else {
-      return [];
+  // const filteredTasks = (option) => {
+  //   if (option === 'All Tasks') {
+  //     return tasks;
+  //   }
+  //   if (option === 'Incompleted') {
+  //     return tasks.filter((task) => !task.completed);
+  //   }
+  //   if (option === 'Completed') {
+  //     return tasks.filter((task) => task.completed);
+  //   } else {
+  //     return [];
+  //   }
+  // };
+
+  // const tasksWithIndex = filteredTasks(filteredOption).map((task, i) => ({
+  //   ...task,
+  //   pageIndex: i + 1,
+  // }));
+
+  const filter = (option) => {
+    switch (option) {
+      case 'All Tasks':
+        return (t) => true;
+      case 'Incompleted':
+        return (t) => !t.completed;
+      case 'Completed':
+        return (t) => t.completed;
+      default:
+        return (t) => false;
     }
   };
 
-  const tasksWithIndex = filteredTasks(filteredOption).map((task, i) => ({
-    ...task,
-    pageIndex: i + 1,
-  }));
+  const tasksWithIndex = tasks
+    .filter(filter(filteredOption))
+    .map((task, i) => ({
+      ...task,
+      pageIndex: i + 1,
+    }));
 
   const pages = Math.ceil(tasks.length / TASKS_PER_PAGE);
 
