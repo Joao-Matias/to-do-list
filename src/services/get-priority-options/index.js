@@ -1,1 +1,1 @@
-export { default } from "./get-priority-options.service.js";
+export { default } from './get-priority-options.service.js'

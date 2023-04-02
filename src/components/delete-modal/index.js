@@ -1,1 +1,1 @@
-export { default } from './delete-modal.component.js';
+export { default } from './delete-modal.component.js'

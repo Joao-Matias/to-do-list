@@ -1,1 +1,1 @@
-export { default } from './get-completion-options.service.js';
+export { default } from './get-completion-options.service.js'

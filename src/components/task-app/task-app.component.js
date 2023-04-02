@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import TaskForm from '../task-form';
-import TaskList from '../task-list';
+import { useEffect, useState } from 'react'
+import TaskForm from '../task-form'
+import TaskList from '../task-list'
 // import getCompletionOptions from '../../services/get-completion-options';
 import {
   getTasks,
@@ -9,60 +9,60 @@ import {
   checkBoxClick,
   completeTasks,
   deleteCompletedTasks,
-} from '../../services/tasks';
-import Options from '../options';
+} from '../../services/tasks'
+import Options from '../options'
 
 const TaskApp = () => {
-  const [formVisibility, setFormVisibility] = useState(false);
-  const [taskList, setTaskList] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [filteredOption, setFilteredOptions] = useState('All Tasks');
+  const [formVisibility, setFormVisibility] = useState(false)
+  const [taskList, setTaskList] = useState([])
+  const [currentPage, setCurrentPage] = useState(0)
+  const [filteredOption, setFilteredOptions] = useState('All Tasks')
 
   useEffect(() => {
-    const tasks = getTasks();
+    const tasks = getTasks()
     if (tasks) {
-      setTaskList(tasks);
+      setTaskList(tasks)
     }
-  }, []);
+  }, [])
 
   const openForm = () => {
-    setFormVisibility(true);
-  };
+    setFormVisibility(true)
+  }
 
   const closeForm = () => {
-    setFormVisibility(false);
-  };
+    setFormVisibility(false)
+  }
 
   const addNewTask = (task) => {
     setTaskList((prevState) => {
-      const addedTask = addTask(task);
-      return [...prevState, addedTask];
-    });
-  };
+      const addedTask = addTask(task)
+      return [...prevState, addedTask]
+    })
+  }
 
   const completeAllTasks = () => {
-    const completedTasks = completeTasks();
-    setTaskList(completedTasks);
-  };
+    const completedTasks = completeTasks()
+    setTaskList(completedTasks)
+  }
 
   const handleTaskCompleted = (taskId) => {
-    const changedTask = checkBoxClick(taskId);
-    setTaskList(changedTask);
-  };
+    const changedTask = checkBoxClick(taskId)
+    setTaskList(changedTask)
+  }
 
   const deleteAllTasks = () => {
-    setTaskList([]);
-    deleteAllTasksLocal();
-  };
+    setTaskList([])
+    deleteAllTasksLocal()
+  }
 
   const deleteAllTaskPlusStorage = () => {
-    const undeletedTasks = deleteCompletedTasks();
-    setTaskList(undeletedTasks);
-  };
+    const undeletedTasks = deleteCompletedTasks()
+    setTaskList(undeletedTasks)
+  }
 
   const selectCompletionStatus = (event) => {
-    setFilteredOptions(event.target.value);
-  };
+    setFilteredOptions(event.target.value)
+  }
 
   return (
     <>
@@ -73,15 +73,9 @@ const TaskApp = () => {
       <select onChange={selectCompletionStatus}>
         <Options />
       </select>
-      {formVisibility && (
-        <TaskForm
-          role='form'
-          addNewTask={addNewTask}
-          closeFormHandler={closeForm}
-        />
-      )}
+      {formVisibility && <TaskForm role="form" addNewTask={addNewTask} closeFormHandler={closeForm} />}
       <TaskList
-        role='list'
+        role="list"
         tasks={taskList}
         setTasks={setTaskList}
         handleTaskCompleted={handleTaskCompleted}
@@ -90,7 +84,7 @@ const TaskApp = () => {
         filteredOption={filteredOption}
       />
     </>
-  );
-};
+  )
+}
 
-export default TaskApp;
+export default TaskApp

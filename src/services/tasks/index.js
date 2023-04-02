@@ -7,4 +7,4 @@ export {
   checkBoxClick,
   completeTasks,
   deleteCompletedTasks,
-} from './tasks.service.js';
+} from './tasks.service.js'
