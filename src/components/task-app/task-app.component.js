@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
 import TaskForm from '../task-form'
 import TaskList from '../task-list'
-// import getCompletionOptions from '../../services/get-completion-options';
 import {
   getTasks,
   addTask,
   deleteAllTasksLocal,
-  checkBoxClick,
-  completeTasks,
-  deleteCompletedTasks,
+  editTask,
+  markAllTaskAsCompleted,
+  deleteCompleted,
 } from '../../services/tasks'
 import Options from '../options'
 
@@ -41,23 +40,50 @@ const TaskApp = () => {
   }
 
   const completeAllTasks = () => {
-    const completedTasks = completeTasks()
-    setTaskList(completedTasks)
+    const request = markAllTaskAsCompleted()
+
+    if (request) {
+      const uncompleted = taskList.some((task) => !task.completed)
+      const completedTasks = taskList.map((task) => {
+        return {
+          ...task,
+          completed: uncompleted,
+        }
+      })
+      setTaskList(completedTasks)
+    }
   }
 
-  const handleTaskCompleted = (taskId) => {
-    const changedTask = checkBoxClick(taskId)
-    setTaskList(changedTask)
+  const handleTaskCompleted = (task) => {
+    const updatedTask = { ...task, completed: !task.completed }
+    const changedTask = editTask(updatedTask)
+
+    if (changedTask) {
+      const changedTask = taskList.map((task) => {
+        if (task.id === updatedTask.id) {
+          return { ...task, ...updatedTask }
+        } else {
+          return task
+        }
+      })
+
+      setTaskList(changedTask)
+    }
   }
 
   const deleteAllTasks = () => {
-    setTaskList([])
-    deleteAllTasksLocal()
+    const deleteAll = deleteAllTasksLocal()
+    if (deleteAll) {
+      setTaskList([])
+    }
   }
 
-  const deleteAllTaskPlusStorage = () => {
-    const undeletedTasks = deleteCompletedTasks()
-    setTaskList(undeletedTasks)
+  const deleteCompletedTask = () => {
+    const request = deleteCompleted()
+    if (request) {
+      const undeletedTasks = taskList.filter((task) => !task.completed)
+      setTaskList(undeletedTasks)
+    }
   }
 
   const selectCompletionStatus = (event) => {
@@ -69,7 +95,7 @@ const TaskApp = () => {
       <button onClick={completeAllTasks}>Complete All</button>
       <button onClick={openForm}>Add Task</button>
       <button onClick={deleteAllTasks}>Delete All Tasks</button>
-      <button onClick={deleteAllTaskPlusStorage}>Clear Complete</button>
+      <button onClick={deleteCompletedTask}>Clear Complete</button>
       <select onChange={selectCompletionStatus}>
         <Options />
       </select>

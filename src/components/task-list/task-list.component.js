@@ -13,35 +13,16 @@ const TaskList = (props) => {
   const [showEditModal, setShowEditModal] = useState(false)
   const { tasks, setTasks, handleTaskCompleted, currentPage, setCurrentPage, filteredOption } = props
 
-  // const filteredTasks = (option) => {
-  //   if (option === 'All Tasks') {
-  //     return tasks;
-  //   }
-  //   if (option === 'Incompleted') {
-  //     return tasks.filter((task) => !task.completed);
-  //   }
-  //   if (option === 'Completed') {
-  //     return tasks.filter((task) => task.completed);
-  //   } else {
-  //     return [];
-  //   }
-  // };
-
-  // const tasksWithIndex = filteredTasks(filteredOption).map((task, i) => ({
-  //   ...task,
-  //   pageIndex: i + 1,
-  // }));
-
   const filter = (option) => {
     switch (option) {
-      case 'All Tasks':
+      case 'All-Tasks':
         return (t) => true
       case 'Incompleted':
         return (t) => !t.completed
       case 'Completed':
         return (t) => t.completed
       default:
-        return (t) => false
+        return (t) => true
     }
   }
 
@@ -52,9 +33,8 @@ const TaskList = (props) => {
 
   const pages = Math.ceil(tasks.length / TASKS_PER_PAGE)
 
-  const clickCheckbox = (event) => {
-    const taskId = +event.target.id
-    handleTaskCompleted(taskId)
+  const clickCheckbox = (task) => {
+    handleTaskCompleted(task)
   }
 
   const openDeleteModal = (task) => {
@@ -63,8 +43,11 @@ const TaskList = (props) => {
   }
 
   const chooseDeleteTask = (taskId) => {
-    const tasksNotDeleted = deleteTask(taskId)
-    setTasks(tasksNotDeleted)
+    const completedStatus = deleteTask(taskId)
+    if (completedStatus) {
+      const filterTasks = tasks.filter((task) => task.id !== taskId)
+      setTasks(filterTasks)
+    }
   }
 
   const openEditModal = (task) => {
@@ -72,9 +55,19 @@ const TaskList = (props) => {
     setSelectTask(task)
   }
 
-  const chooseEditTask = (newTask) => {
-    const editTasks = editTask(newTask)
-    setTasks(editTasks)
+  const chooseEditTask = (task) => {
+    const updatedTasks = editTask(task)
+
+    if (updatedTasks) {
+      const changedTask = tasks.map((t) => {
+        if (t.id === task.id) {
+          return { ...t, ...task }
+        } else {
+          return t
+        }
+      })
+      setTasks(changedTask)
+    }
   }
 
   return (
@@ -110,7 +103,9 @@ const TaskList = (props) => {
                   hover-message={task.completed ? 'Mark as Incomplete' : 'Mark as Complete'}
                   className={styles.checkbox}
                   type="checkbox"
-                  onChange={clickCheckbox}
+                  onChange={() => {
+                    clickCheckbox(task)
+                  }}
                 ></input>
                 <div onClick={() => openDeleteModal(task)} hover-message={'Delete task'} className={styles.bin}>
                   <ImBin />

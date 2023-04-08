@@ -4,7 +4,6 @@ export {
   deleteAllTasksLocal,
   deleteTask,
   editTask,
-  checkBoxClick,
-  completeTasks,
-  deleteCompletedTasks,
+  markAllTaskAsCompleted,
+  deleteCompleted,
 } from './tasks.service.js'
