@@ -1,5 +1,4 @@
-// const TASKS_KEY = process.env['REAC_APP_TASKS_KEY']
-const TASKS_KEY = 'tasks'
+const TASKS_KEY = process.env.REACT_APP_TASKS_KEY
 
 export function getTasks() {
   return JSON.parse(localStorage.getItem(TASKS_KEY) || '[]')
