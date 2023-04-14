@@ -1,8 +1,8 @@
-import "./App.css";
-import TaskApp from "./components/task-app";
+import './App.css'
+import TaskApp from './components/task-app'
 
 function App() {
-  return <TaskApp />;
+  return <TaskApp />
 }
 
-export default App;
+export default App

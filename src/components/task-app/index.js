@@ -1,1 +1,1 @@
-export { default } from "./task-app.component.js";
+export { default } from './task-app.component.js'
