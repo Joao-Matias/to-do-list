@@ -32,6 +32,7 @@ const TaskForm = (props) => {
     const {
       target: { name, value },
     } = event
+
     setTask({ ...task, [name]: value })
   }
 

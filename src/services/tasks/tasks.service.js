@@ -21,7 +21,6 @@ export function deleteTask(taskId) {
   localStorage.setItem(TASKS_KEY, JSON.stringify(filterTasks))
   return true
 }
-console.log('ola')
 export function editTask(updatedTask) {
   const tasks = getTasks()
 
