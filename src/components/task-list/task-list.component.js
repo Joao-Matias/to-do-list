@@ -33,24 +33,17 @@ const TaskList = (props) => {
           return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
         }
       case 'Priority':
-        return (a, b) => {}
-      // default:
-      //   return (a, b) => {
-      //     return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
-      //   }
+        return (b, a) => {
+          return a.prioNumber - b.prioNumber
+        }
+      default:
+        return
     }
   }
 
   const tasksWithIndex = tasks
     .filter(filter(filteredOption))
-    .sort(
-      sortedFilter(
-        sortedOptions,
-        tasks.map((task) => {
-          return task
-        }),
-      ),
-    )
+    .sort(sortedFilter(sortedOptions))
     .map((task, i) => ({
       ...task,
       pageIndex: i + 1,
