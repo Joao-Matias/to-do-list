@@ -32,7 +32,22 @@ const TaskForm = (props) => {
     const {
       target: { name, value },
     } = event
-    setTask({ ...task, [name]: value })
+
+    let prioNumber = 1
+
+    if (name === 'priority') {
+      if (value === 'Low') {
+        prioNumber = 1
+      }
+      if (value === 'Medium') {
+        prioNumber = 2
+      }
+      if (value === 'High') {
+        prioNumber = 3
+      }
+    }
+
+    setTask({ ...task, [name]: value, prioNumber: prioNumber })
   }
 
   return (

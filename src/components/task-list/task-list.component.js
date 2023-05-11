@@ -11,7 +11,7 @@ const TaskList = (props) => {
   const [selectedTask, setSelectTask] = useState()
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
-  const { tasks, setTasks, handleTaskCompleted, currentPage, setCurrentPage, filteredOption } = props
+  const { tasks, setTasks, handleTaskCompleted, currentPage, setCurrentPage, filteredOption, sortedOptions } = props
 
   const filter = (option) => {
     switch (option) {
@@ -26,10 +26,28 @@ const TaskList = (props) => {
     }
   }
 
-  const tasksWithIndex = tasks.filter(filter(filteredOption)).map((task, i) => ({
-    ...task,
-    pageIndex: i + 1,
-  }))
+  const sortedFilter = (option) => {
+    switch (option) {
+      case 'Due-Date':
+        return (a, b) => {
+          return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+        }
+      case 'Priority':
+        return (b, a) => {
+          return a.prioNumber - b.prioNumber
+        }
+      default:
+        return
+    }
+  }
+
+  const tasksWithIndex = tasks
+    .filter(filter(filteredOption))
+    .sort(sortedFilter(sortedOptions))
+    .map((task, i) => ({
+      ...task,
+      pageIndex: i + 1,
+    }))
 
   const pages = Math.ceil(tasks.length / TASKS_PER_PAGE)
 

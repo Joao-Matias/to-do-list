@@ -10,12 +10,14 @@ import {
   deleteCompleted,
 } from '../../services/tasks'
 import Options from '../options'
+import getSortingOptions from '../../services/get-sorting-options'
 
 const TaskApp = () => {
   const [formVisibility, setFormVisibility] = useState(false)
   const [taskList, setTaskList] = useState([])
   const [currentPage, setCurrentPage] = useState(0)
   const [filteredOption, setFilteredOptions] = useState('All Tasks')
+  const [sortedOptions, setSortedOptions] = useState('Due Date')
 
   useEffect(() => {
     const tasks = getTasks()
@@ -23,6 +25,15 @@ const TaskApp = () => {
       setTaskList(tasks)
     }
   }, [])
+
+  const sortingOptions = getSortingOptions().map((option) => {
+    const { value, label } = option
+    return (
+      <option key={value} value={value}>
+        {label}
+      </option>
+    )
+  })
 
   const openForm = () => {
     setFormVisibility(true)
@@ -90,6 +101,10 @@ const TaskApp = () => {
     setFilteredOptions(event.target.value)
   }
 
+  const selectSortingStatus = (event) => {
+    setSortedOptions(event.target.value)
+  }
+
   return (
     <>
       <button onClick={completeAllTasks}>Complete All</button>
@@ -99,6 +114,7 @@ const TaskApp = () => {
       <select onChange={selectCompletionStatus}>
         <Options />
       </select>
+      <select onChange={selectSortingStatus}>{sortingOptions}</select>
       {formVisibility && <TaskForm role="form" addNewTask={addNewTask} closeFormHandler={closeForm} />}
       <TaskList
         role="list"
@@ -108,6 +124,7 @@ const TaskApp = () => {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         filteredOption={filteredOption}
+        sortedOptions={sortedOptions}
       />
     </>
   )
